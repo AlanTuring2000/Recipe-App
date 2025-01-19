@@ -1,0 +1,143 @@
+<!-- This has nothing to do with the project, it's just my reminder of the
+ various input box options -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proposition de projet</title>
+  <link href="style_2.css" rel="stylesheet">
+  <script src="portfolioAntoine.js" defer></script>
+<!--  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Manrope&family=Montserrat&display=swap" rel="stylesheet"> -->
+</head>
+
+<body>
+	<header>
+  		<img class=logo_Antoine src="images/logo.png" alt="logo d'Antoine">
+    	<h1 class=proposition_projet id="mon_projet">Proposition de projet</h1>
+	</header>
+
+<main>
+  <section>
+  	<form method="get" action="">
+<!-- déclare un formulaire, qui sera envoyé - par la méthode 'get' - en
+  traitement backend à l'adresse URL spécifiée par 'action' (pour le moment,
+  pas de traitement backend). La méthode 'get' n'est pas sécurisée, elle ne
+  doit être utilisée que pour des données non-sensibles; l'autre méthode
+  d'envoi de données est 'post', qui est sécurisée, n'a pas de limitation de
+  taille, mais le formulaire ne pourra pas être bookmarked. -->
+		<fieldset><legend>Vos coordonnées</legend>
+<!-- à l'intérieur d'un formulaire, pour délimiter les différents paragraphes
+ on peut utiliser <p></p>, mais c'est esthétiquement plus satisfaisant
+ d'utiliser <fieldset></fieldset>: cela va faire apparaître des cadres pour
+ chaque section du formulaire; en ajoutant un <legend></legend> on peut
+ donner un titre à chacune de ces sections -->
+			<label for="prenom">Votre prénom</label> : <input type="text"
+            name="prenom" id="prenom" size="25" maxlength="20"
+            placeholder="ex.: Neil" value="Ohm" autofocus required><br>
+<!-- comme auparavant, 'id' sert à identifier l'élément afin d'y accéder.
+ 'name' réfère à la variable que cette partie du formulaire va permettre de
+ renseigner; elle pourrait avoir plusieurs composantes. 'type' déclare le
+ type d'input; il y a beaucoup de possibilités (eg button, checkbox, date,
+ email,…); "text" correspond à un texte d'une seule ligne. On lie le label à
+ l'input en utilisant 'for', qui doit avoir la même valeur que 'id'.
+On peut ajouter plusieurs attributs à <input>: 'size' permet de spécifier la
+longueur de l'emplacement; 'maxlength' limite le nombre maximal de
+caractères; 'placeholder' permet de donner une indication sur le contenu du
+champ; dans un <input>, 'value' permet de remplir le champ avec une valeur
+par défaut. 'autofocus' est censé placer un curseur dans la boîte de réponse,
+mais ça ne fonctionne pas sur mon téléphone (même sans 'placeholder' ni
+'value'). 'required' indiquera à l'utilisateur au moment de l'envoi du
+formulaire qu'il doit impérativement remplir la case correspondante; dans le
+fichier css on peut utiliser la pseudo-classe ':required' afin de changer le
+style des éléments requis; on peut de même utiliser les pseudo-classes
+':invalid' pour les éléments invalides, et ':focus' pour changer le style de
+la case une fois que le curseur se trouve à l'intérieur.
+NOTE: en écrivant ':' entre le <label> et l'<input> on s'assure que ":" sera
+  placé à égale distance de la demande de renseignement et de l'emplacement
+  pour la réponse -->
+ 			<label for="nom">Votre nom</label> : <input type="text" name="nom"
+            id="nom" size="25" maxlength="20"><br>
+			<label for="email">Votre email</label> : <input type="email"
+            name="email" id="email" size="25">
+		</fieldset>
+		<fieldset><legend>Votre projet</legend>
+      <label for="projet">Présentez votre projet succinctement (vous pouvez
+            agrandir le champ du texte en utilisant la poignée en bas à
+            droite)</label><br>
+		  <textarea name="projet" id="projet" cols="40" rows="4"></textarea></fieldset>
+<!-- pour une réponse qui pourrait nécessiter plusieurs lignes on utilisera
+ <textarea></textarea> à la place de <input>, et le 'type' est alors
+ sous-entendu. <textarea> présente un champ de texte plutôt petit (2 lignes
+ de 20 caractères chacune sur mon téléphone), mais qu'on peut agrandir en
+ utilisant une poignée placée en bas à droite; on peut toutefois demander
+ une boîte de départ plus grande (ici 4 lignes de 40 caractères chacune); on
+ peut aussi la demander dans le fichier css (using 'width' and 'height') -->
+		<fieldset><legend>Vos goûts alimentaires</legend>
+		      Cochez les aliments que vous aimez manger :<br>
+		  <input type="checkbox" name="frites" id="frites"> <label for="frites">
+            Frites</label><br>
+		  <input type="checkbox" name="steak" id="steak"> <label for="steak">
+            Steak</label><br>
+      <input type="checkbox" name="epinards" id="epinards">
+            <label for="epinards">Épinards</label><br>
+      <input type="checkbox" name="huitres" id="huitres" checked="true">
+            <label for="huitres">Huitres</label></fieldset>
+<!-- ici on écrit l'<input> avant le <label>, de sorte que la case à cocher
+  apparaisse au début de la ligne. -->
+		<fieldset><legend>Votre âge et votre continent</legend>
+		      Veuillez indiquer la tranche d'âge dans laquelle vous vous situez,
+          et sur quel continent vous avez passé le plus de temps :<br>
+		  <input type="radio" name="age" value="moins15" id="moins15"
+            checked="true"><label for="moins15">Moins de 15 ans</label><br>
+		  <input type="radio" name="age" value="medium15-25" id="medium15-25">
+            <label for="medium15-25">15-25 ans</label><br>
+		  <input type="radio" name="age" value="medium25-40" id="medium25-40">
+            <label for="medium25-40">25-40 ans</label><br>
+		  <input type="radio" name="age" value="plus40" id="plus40">
+            <label for="plus40">Plus de 40 ans</label><br><br>
+		  <input type="radio" name="continent" value="europe" id="europe">
+            <label for="europe">Europe</label><br>
+		  <input type="radio" name="continent" value="afrique" id="afrique">
+            <label for="afrique">Afrique</label><br>
+		  <input type="radio" name="continent" value="asie" id="asie">
+            <label for="asie">Asie</label><br>
+		  <input type="radio" name="continent" value="amerique" id="amerique">
+            <label for="amerique">Amérique</label><br>
+		  <input type="radio" name="continent" value="oceanie" id="oceanie">
+            <label for="oceanie">Océanie</label></fieldset>
+<!-- comme 'checkbox', le type 'radio' offre plusieurs possibilités, mais on
+ ne peut en choisir qu'une seule. 'name' doit être le même pour chaque
+ possibilité, afin qu'une seule valeur soit sélectionnable (une possibilité
+ unique par valeur de 'name'); la 'value' associée à un bouton est la valeur
+ qui sera enregistrée si l'utilisateur choisit ce bouton; 'checked="true"'
+ checks a button by default -->
+		<fieldset><legend>Votre pays d'habitation</legend>
+		  <label for="pays">Dans quel pays habitez-vous actuellement ?</label><br>
+		  <select name="pays" id="pays">
+		    <option value="france">France</option>
+		    <option value="thailande" selected>Thaïlande</option>
+		    <option value="espagne">Espagne</option>
+		    <option value="royaume-uni">Royaume-Uni</option>
+		    <option value="canada">Canada</option>
+		    <option value="japon">Japon</option>
+		  </select></fieldset><br>
+<!-- pour un menu déroulant on utilisera <select></select> à la place de
+ <input>, le 'type' sera alors sous-entendu, avec au milieu les différentes
+ options présentées avec <option></option>; on utilisera l'attribut
+ 'selected' si on veut proposer une valeur par défaut -->
+		  <input type="submit" value="Envoyer">
+<!-- envoie le formulaire à l'adresse spécifiée dans <form action="">
+  -ici 'action' est vide donc le formulaire n'est envoyé nulle part et on
+  reste sur sa page -->
+	  </form>
+  </section>
+
+	<footer>
+		<div class=lien_Bio><a href="Biographie_2.html#retour"> Retour à la
+          biographie générale </a></div>
+	</footer>
+</main>
