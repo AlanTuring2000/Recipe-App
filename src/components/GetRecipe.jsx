@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { DisplayRecipe } from "./DisplayRecipe.jsx";
  
 const prompt = "You are an assistant that suggests recipes based on a list \
