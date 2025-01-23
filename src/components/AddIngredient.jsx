@@ -33,8 +33,8 @@ function AddIngredient({setIngredients}) {
 
 
   return (<>
-    <form action={enterIngredient} className="mt-10 mb-6 flex flex-col sm:flex-row
-          justify-center items-center font-arial">
+    <form action={enterIngredient} className="mt-10 mb-6 flex flex-col
+          sm:flex-row justify-center items-center font-arial">
       <input name="ingredient"
             className="grow max-w-96 min-w-72 mx-2 my-1 border-2 rounded-md
             border-blue-500 bg-cyan-100 px-4 py-2 text-cyan-800
