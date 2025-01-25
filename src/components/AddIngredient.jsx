@@ -14,7 +14,11 @@ import { useRef } from "react";
 
 
 function AddIngredient({setIngredients}) {
-  // Create a ref to store the key counter, initialized as 0
+  /* Create a ref to store the key counter, initialized as 0
+  Compared to states, references are mutable (ie we can modify their value
+  directly, whereas modifying the value of a state requires the creation of
+  another variable via the useState's setter), and modifying a reference
+  doesn't cause a re-render */
   const keyCounter = useRef(0);
 
   // Function to handle the form for adding an ingredient (see

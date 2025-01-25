@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DisplayRecipe } from "./DisplayRecipe.jsx";
  
 const prompt = "You are an assistant that suggests recipes based on a list \
@@ -45,6 +45,18 @@ function GetRecipe({ingredients}) {
   // To show/hide the recipe
   const [recipeShown, setRecipeShown] = useState(false);
 
+  /* Create a ref for the recipe container; its goal is to scroll down the
+  page to show the recipe when it is displayed.
+  A ref is an object with a single property, 'current', which can be of any
+  type. Here it will be an HTMLDivElement (the <div>...</div> containing the
+  button and the recipe), but it starts here as a 'null' (since the <div>
+  doesn't exist yet; in TS it would thus be defined as
+  const recipeContainerRef = useRef<HTMLDivElement | null>(null))
+  It is declared here, it will get attached in the <div> it refers to via
+  ref={recipeContainerRef}
+  and will be used when the user asks for the recipe to be shown (see below) */
+  const recipeContainerRef = useRef(null);
+
   // Reset "recipe" whenever "ingredients" changes
   useEffect(() => {setRecipeShown(false); setRecipe(null)}, [ingredients]);
 
@@ -59,13 +71,14 @@ function GetRecipe({ingredients}) {
     
   // useEffect ensures that the scrolling downwards is done after the recipe
   // is displayed, so the page can indeed be scrolled down
-  useEffect(() => {isLoading && window.scrollBy(0, 200)}, [isLoading]);  
+  useEffect(() => {isLoading && window.scrollBy({top: 200})}, [isLoading]);  
   useEffect(() => {if (recipeShown)
-        {document.getElementById("recipe-container")
+        {recipeContainerRef.current
               .scrollIntoView({behavior: "smooth"})}}, [recipeShown]);
 
   return (<>
-    <div id="recipe-container" className="mt-20 mb-8 border-2 rounded-xl
+    <div ref={recipeContainerRef} // Attach the ref to the recipe container
+          id="recipe-container" className="mt-20 mb-8 border-2 rounded-xl
           border-blue-400 bg-cyan-100 p-4 sm:p-0 flex flex-col
           sm:flex-row justify-center items-center">
       <div className="flex flex-col justify-center items-center">
@@ -77,7 +90,7 @@ function GetRecipe({ingredients}) {
             border-purple-500 bg-purple-200 p-2 text-purple-900">
             Get a recipe</button></div>
     {isLoading && <div className="flex justify-center items-center h-20">
-          <div className="w-12 h-12 border-4 border-blue-500 border-solid
+          <div className="w-10 h-10 border-4 border-blue-500 border-solid
           border-t-transparent rounded-full animate-spin"></div></div>}
     {!recipe ? null : recipeShown && <DisplayRecipe recipeStr={recipe} />}</>)}
 
